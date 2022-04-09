@@ -1,0 +1,36 @@
+{% extends "infused/layout/basic.html" %}
+
+{% block title %}
+{{ current_channel.channel_name }} - Infused
+{% endblock title %}
+
+{% block content %}
+<body>
+    <div id="pic">
+    <img class="avatar_image" src="{{ images.article_image.url }}"
+         alt="Аватар канала">
+    </div>
+    <div id="text">
+    <h2>{{ current_channel.channel_name }}</h2>
+    </div>
+    <div class="grid">
+        {% for video in videos %}
+            <div>
+                {% if video.image_poster %}
+                    <video controls poster="{{ video.image_poster.url }}"
+                           class="videoclass" width="300" height="170">
+                    <source src="{{ video.clip.url }}" type="video/mp4">
+                    </video>
+                {% else %}
+                    <video controls class="videoclass" width="300" height="170">
+                        <source src="{{ video.clip.url }}" type="video/mp4">
+                    </video>
+                {% endif %}
+                <p>{{ video.title|truncatechars_html:65 }}</p>
+                <a href="{{ channel.pk }}">{{ video.channel }}</a>
+                <p> {{ video.published|date:"d.m.Y "}}</p>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+{% endblock content %}

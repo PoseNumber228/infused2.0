@@ -1,0 +1,36 @@
+{% extends "infused/layout/basic.html" %}
+
+{% block title %}Выбранный жанр - {{ current_genre.genre_name }}
+{% endblock title %}
+
+{% block content %}
+<body>
+    <div>
+        {% for genre in genres %}
+        <a href="{% url 'infused:genre_filter' genre.pk %}" class="btn">
+            {{ genre.genre_name }}</a>
+        {% endfor %}
+    </div>
+    <div class="grid">
+        {% for video in videos %}
+            <div>
+                {% if video.image_poster %}
+                    <video controls poster="{{ video.image_poster.url }}"
+                           class="videoclass" width="300" height="170">
+                    <source src="{{ video.clip.url }}" type="video/mp4">
+                    </video>
+                {% else %}
+                    <video controls class="videoclass" width="300" height="170">
+                        <source src="{{ video.clip.url }}" type="video/mp4">
+                    </video>
+                {% endif %}
+                <h5>{{ video.title|truncatechars_html:65 }}</h5>
+                <a href="{% url 'infused:get_channel' video.channel.pk %}">
+                    <p>{{ video.channel.channel_name }}</p>
+                </a>
+                <p>{{ video.published|date:"d.m.Y "}}</p>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+{% endblock content %}

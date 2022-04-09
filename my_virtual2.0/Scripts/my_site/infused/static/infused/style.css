@@ -1,0 +1,213 @@
+body {
+    font-family: "Raleway", sans-serif;
+    font-weight: 300;
+}
+
+.btn_search {
+    background: #f5f5f5;
+    display: inline-block;
+    transition: 0.4s;
+    color: #000;
+    cursor: pointer;
+    padding: 11.6px 40px;
+    border: 1px solid #a6a6a6;
+    margin-left: -5px;
+}
+
+.btn_search:hover {
+    background-color: #e0e0e0;
+    color: #000;
+}
+
+.btn {
+    background: #f5f5f5;
+    display: inline-block;
+    padding: 10px 27.7px;
+    color: #000;
+    cursor: pointer;
+    border: 1px solid #a6a6a6;
+    border-radius: 20px;
+    transition: 0.4s;
+    margin-top: -5px;
+    margin-bottom: 10px;
+}
+
+.btn:hover {
+    background-color: #e0e0e0;
+    color: #000;
+}
+
+.form_search {
+    height: 39px;
+    width: 1165px;
+    margin-left: -10px;
+}
+
+/*общие настройки сетки*/
+.grid {
+    /*подключаем сетку*/
+    display: grid;
+    background-color: #fcfcfc;
+    /*формируем по 4 одинаковых строки*/
+    grid-template-columns: repeat(auto-fit, minmax(320px, 320px));
+    border: 2px solid #e7e7e7;
+    width: 1280px;
+}
+
+/*внешний вид ячеек*/
+.grid > * {
+    border-color: black;
+    /*скругление углов*/
+    border-radius: 10px;
+    /*расстояние от одной границы ячейки до другой*/
+    margin: 10px;
+}
+
+a {
+    color: black;
+    text-decoration: none;
+}
+
+video {
+    object-fit: inherit;
+}
+
+nav {
+    font-size: 12pt;
+    width: 180px;
+    float: left;
+}
+
+nav a {
+    display: block;
+    margin: 10px 0;
+}
+
+section {
+    margin-left: 170px;
+}
+
+/* скрываем чекбокс */
+#menu__toggle {
+    opacity: 0;
+}
+
+/* стилизуем кнопку */
+.menu__btn {
+    display: flex; /* используем flex для центрирования содержимого */
+    align-items: center; /* центрируем содержимое кнопки */
+    position: fixed;
+    top: 20px;
+    left: 20px;
+
+    width: 26px;
+    height: 26px;
+
+    cursor: pointer;
+    z-index: 1;
+}
+
+/* добавляем гамбургер */
+.menu__btn > span,
+.menu__btn > span::before,
+.menu__btn > span::after {
+    display: block;
+    position: absolute;
+
+    width: 100%;
+    height: 2px;
+
+    background-color: #616161;
+}
+.menu__btn > span::before {
+    content: '';
+    top: -8px;
+}
+.menu__btn > span::after {
+    content: '';
+    top: 8px;
+}
+
+/* контейнер меню */
+.menu__box {
+    display: block;
+    position: fixed;
+    visibility: hidden;
+    top: 0;
+    left: -100%;
+
+    width: 172px;
+    height: 100%;
+
+    margin: 0;
+    padding: 80px 0;
+
+    list-style: none;
+    text-align: left;
+
+    background-color: #ECEFF1;
+    box-shadow: 1px 0 6px rgba(0, 0, 0, .2);
+}
+
+/* элементы меню */
+.menu__item {
+    display: block;
+    padding: 12px 24px;
+
+    color: #333;
+
+    font-family: "Raleway", sans-serif;
+    font-size: 12pt;
+    font-weight: normal;
+
+    text-decoration: none;
+}
+.menu__item:hover {
+    background-color: #CFD8DC;
+}
+
+#menu__toggle:checked ~ .menu__btn > span {
+    transform: rotate(45deg);
+}
+#menu__toggle:checked ~ .menu__btn > span::before {
+    top: 0;
+    transform: rotate(0);
+}
+#menu__toggle:checked ~ .menu__btn > span::after {
+    top: 0;
+    transform: rotate(90deg);
+}
+#menu__toggle:checked ~ .menu__box {
+    visibility: visible;
+    left: 0;
+}
+
+.menu__btn > span,
+.menu__btn > span::before,
+.menu__btn > span::after {
+    transition-duration: .25s;
+}
+
+.menu__box {
+    transition-duration: .25s;
+}
+.menu__item {
+    transition-duration: .25s;
+}
+
+.avatar_image {
+    width: 100px;
+    height: 100px;
+    border: 1px;
+    border-radius: 100% ;
+}
+
+#pic {
+    float: top;
+    margin-bottom: -80px;
+}
+
+#text {
+    margin-left: 150px;
+    margin-bottom: 40px;
+}

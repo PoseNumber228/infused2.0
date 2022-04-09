@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html"; charset="UTF-8">
+        <title>Добавить видео</title>
+    </head>
+    <body>
+        <h1><a href="{% url 'infused:index' %}">Infused</a></h1>
+        <h3>Добавить видео</h3>
+        <div>
+            {% for genre in genres %}
+                <a href="{% url 'infused:genre_filter' genre.pk %}">
+                    {{ genre.genre_name }}</a>
+            {% endfor %}
+        </div>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p}}
+            <input type="submit" value="Добавить">
+        </form>
+    </body>
+</html>
