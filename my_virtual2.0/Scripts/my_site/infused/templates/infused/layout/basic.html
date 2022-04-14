@@ -3,9 +3,12 @@
 <html lang="en">
     <head>
         <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
-        <title>{% block title %}Главная Infused{% endblock title %}</title>
+        <title>{% block title %}Infused{% endblock title %}</title>
         <link rel="stylesheet" type="text/css"
               href="{% static 'infused/style.css' %}">
+        <script type="text/javascript" src="{% static 'infused/scripts.js' %}">
+        </script>
+        <link rel="icon" href="media/icons/favicon2-removebg-preview.png" type="image/png">
     </head>
     <body>
         <nav>
@@ -17,19 +20,41 @@
             <ul class="menu__box">
                 <li><a class="menu__item" href="{% url 'infused:index' %}">Infused</a></li>
                 <li><h3><a class="menu__item" href='#'>Подписки</a></h3></li>
-                <li><h3><a class="menu__item" href='#'>Ваш канал</a></h3></li>
                 <li><h3><a class="menu__item" href='#'>Понравившиеся</a></h3></li>
                 <li><h3><a class="menu__item" href='#'>Смотреть позже</a></h3></li>
-                <li><h3><a class="menu__item" href="{% url 'infused:add' %}">Добавить видео</a></h3></li>
             </ul>
             </div>
         </nav>
+        <div class="popup__open">
+            <a href="#popup">
+                <img class="popup__image" src="media/icons/favicon2-removebg-preview.png" type="image/png">
+            </a>
+        </div>
+        <div id="popup" class="popup">
+            <div class="popup__body">
+                <div class="popup__content">
+                    <a href="#" class="popup__close"></a>
+                    {% if user.is_authenticated %}
+                        <div class="popup__text">{{ user.username }}</div>
+                    {% else %}
+                        <a class="popup__text" href="{% url 'users:login' %}">Войти</a>
+                    {% endif %}
+                    <a class="popup__text" href='#'>Мой канал</a>
+                    <a class="popup__text" href="{% url 'infused:add_channels' %}">Добавить канал</a>
+                    <a class="popup__text" href="{% url 'infused:add_videos' %}">Добавить видео</a>
+                    <a class="popup__text" onclick="ExitAlert()" href="{% url 'users:logout' %}">Выйти</a>
+                </div>
+            </div>
+        </div>
         <section>
-            <form action="{% url 'infused:search' %}" method="get">
+            <form action="{% url 'infused:search' %}" method="POST">
+                {% csrf_token %}
                 <input class="form_search" type="search"
                        placeholder="Введите запрос"
-                       font-aria-label="Search", name="q">
-                <button class="btn_search" type="submit">Поиск</button>
+                       font-aria-label="Search" name="searched">
+                <button class="btn_search" type="submit">
+                    <img class="search_img" src="media/icons/search3.png">
+                </button>
             </form>
             {% block content %}
             {% endblock content%}

@@ -34,6 +34,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     # Мои приложения.
     'infused.apps.InfusedConfig',
+    'users',
 
     # Стандартные приложения django.
     'django.contrib.admin',

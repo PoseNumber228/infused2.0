@@ -48,10 +48,10 @@ class Video(models.Model):
                                 allowed_extensions=['mp4'])],
                             verbose_name='Видеоролик')
     image_poster = models.FileField(upload_to='image/',
-                                    verbose_name='Превью видео')
+                                    verbose_name='Превью видео'
+                                                 '(Не обязательно)', blank=True)
 
     class Meta:
         verbose_name = 'Видео'
         verbose_name_plural = 'Видео'
         ordering = ['-published']
-

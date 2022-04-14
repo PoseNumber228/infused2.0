@@ -4,7 +4,7 @@ from django.views.generic.edit import CreateView
 from django.views.generic.list import ListView
 from django.db.models import Q
 
-from .forms import VideoForm
+from .forms import VideoForm, ChannelForm
 
 from .models import Video, Channel, Genre
 
@@ -27,11 +27,13 @@ def index(request):
 def get_channel(request, channel_id):
     """Выводит канал по его названию"""
     images = Channel.objects.get(pk=channel_id)
+    descriptions = Channel.objects.get(pk=channel_id)
+    current_channel = Channel.objects.get(pk=channel_id)
     videos = Video.objects.filter(channel=channel_id)
     channels = Channel.objects.all()
-    current_channel = Channel.objects.get(pk=channel_id)
     context = {
         'images': images,
+        'descriptions': descriptions,
         'videos': videos,
         'channels': channels,
         'current_channel': current_channel
@@ -52,35 +54,53 @@ def genre_filter(request, genre_id):
     return render(request, 'infused/genre_filter.html', context)
 
 
-
 def add_video(request):
     """Добавляет видео на канал."""
     if request.method != 'POST':
-        form = VideoForm()
+        video_form = VideoForm()
     else:
-        form = VideoForm(request.POST, request.FILES)
-        if form.is_valid():
-            add_video = form.save(commit=False)
-            add_video.save()
+        video_form = VideoForm(request.POST, request.FILES)
+        if video_form.is_valid():
+            add_videos = video_form.save(commit=False)
+            add_videos.save()
             return redirect('infused:index')
 
     context = {
-        'form': form
+        'video_form': video_form
     }
     return render(request, 'infused/add_video.html', context)
 
 
-class Search(ListView):
+def add_channel(request):
+    """Позволяет польователю создать канал."""
+    if request.method != 'POST':
+        channel_form = ChannelForm()
+    else:
+        channel_form = ChannelForm(request.POST, request.FILES)
+        if channel_form.is_valid():
+            create_channels = channel_form.save(commit=False)
+            create_channels.save()
+            return redirect('infused:index')
+
+    context = {
+        'channel_form': channel_form
+    }
+    return render(request, 'infused/add_channel.html', context)
+
+
+def search_channel(request):
     """Поиск"""
-    paginate_by = 4
-
-    def get_queryset(self):
-        return Video.objects.filter(
-            title__icontains=self.request.GET.get("q")
+    if request.method == "POST":
+        searched = request.POST['searched']
+        values = Video.objects.filter(
+            title__iregex=searched
         )
+        context = {
+            'searched': searched,
+            'values': values,
+        }
+        return render(request, 'infused/search_list.html', context)
+    else:
+        return render(request, 'infused/search_list.html', {})
 
-    def get_context_data(self, *args, **kwargs):
-        context = super().get_context_data(*args, **kwargs)
-        context["q"] = self.request.GET.get("q")
-        return context
 
