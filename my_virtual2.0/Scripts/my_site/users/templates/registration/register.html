@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Регистрация</title>
+    </head>
+    <body>
+        <h1><a href="{% url 'infused:index' %}">Infused</a></h1>
+        <h3>Регистрация</h3>
+        <form method="post" action="{% url 'users:register' %}">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button name="submit">Регистрация</button>
+            <input type="hidden" name="next" value="{% url 'infused:index' %}"/>
+        </form>
+    </body>
+</html>

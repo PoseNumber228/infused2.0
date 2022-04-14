@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Создать канал</title>
+    </head>
+    <body>
+        <h1><a href="{% url 'infused:index' %}">Infused</a></h1>
+        <h3>Создать канал</h3>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ channel_form.as_p}}
+            <input type="submit" value="Создать">
+        </form>
+    </body>
+</html>
