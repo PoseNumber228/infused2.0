@@ -18,7 +18,6 @@
                     <span></span>
                 </label>
             <ul class="menu__box">
-                <li><a class="menu__item" href="{% url 'infused:index' %}">Infused</a></li>
                 <li><h3><a class="menu__item" href='#'>Подписки</a></h3></li>
                 <li><h3><a class="menu__item" href='#'>Понравившиеся</a></h3></li>
                 <li><h3><a class="menu__item" href='#'>Смотреть позже</a></h3></li>
@@ -27,7 +26,11 @@
         </nav>
         <div class="popup__open">
             <a href="#popup">
-                <img class="popup__image" src="media/icons/favicon2-removebg-preview.png" type="image/png">
+                {% if user.is_authenticated %}
+                    <img class="popup__image" src="media/icons/favicon2-removebg-preview.png" type="image/png" alt="Аватар канала">
+                {% else %}
+                <div class="btn__login">Нажмите для регистрации/входа!</div>
+                {% endif %}
             </a>
         </div>
         <div id="popup" class="popup">
@@ -36,13 +39,14 @@
                     <a href="#" class="popup__close"></a>
                     {% if user.is_authenticated %}
                         <div class="popup__text">{{ user.username }}</div>
+                        <a class="popup__text" href='#'>Мой канал</a>
+                        <a class="popup__text" href="{% url 'infused:add_channels' %}">Создать канал</a>
+                        <a class="popup__text" href="{% url 'infused:add_videos' %}">Добавить видео</a>
+                        <a class="popup__text" onclick="ExitAlert()" href="{% url 'users:logout' %}">Выйти</a>
                     {% else %}
+                        <a class="popup__text" href="{% url 'users:register' %}">Регистрация</a>
                         <a class="popup__text" href="{% url 'users:login' %}">Войти</a>
                     {% endif %}
-                    <a class="popup__text" href='#'>Мой канал</a>
-                    <a class="popup__text" href="{% url 'infused:add_channels' %}">Добавить канал</a>
-                    <a class="popup__text" href="{% url 'infused:add_videos' %}">Добавить видео</a>
-                    <a class="popup__text" onclick="ExitAlert()" href="{% url 'users:logout' %}">Выйти</a>
                 </div>
             </div>
         </div>
@@ -55,6 +59,9 @@
                 <button class="btn_search" type="submit">
                     <img class="search_img" src="media/icons/search3.png">
                 </button>
+                <a class="main_page1" href="{% url 'infused:index' %}">Inf</a>
+                <a class="main_page2" href="{% url 'infused:index' %}">use</a>
+                <a class="main_page3" href="{% url 'infused:index' %}">d</a>
             </form>
             {% block content %}
             {% endblock content%}

@@ -3,6 +3,30 @@ body {
     font-weight: 300;
 }
 
+.main_page1 {
+    font-family: "Raleway", sans-serif;
+    font-weight: 900;
+    font-size: 35px;
+    margin-left: 35px;
+    color: #ff0000;
+}
+
+.main_page2 {
+    font-family: "Raleway", sans-serif;
+    font-weight: 900;
+    font-size: 35px;
+    color: #0232ff;
+    margin-left: -4px;
+}
+
+.main_page3 {
+    font-family: "Raleway", sans-serif;
+    font-weight: 900;
+    font-size: 35px;
+    color: #e2ff00;
+    margin-left: -4px;
+}
+
 .btn_search {
     background: #f5f5f5;
     display: inline-block;
@@ -11,7 +35,7 @@ body {
     cursor: pointer;
     padding: 11px 40px;
     border: 1px solid #a6a6a6;
-    margin-left: -5px;
+    margin-left: -6px;
     height: 50px;
 }
 
@@ -144,6 +168,7 @@ section {
     display: block;
     position: absolute;
 
+
     width: 100%;
     height: 2px;
 
@@ -162,19 +187,15 @@ section {
 .menu__box {
     display: block;
     position: fixed;
-    visibility: hidden;
+    visibility: visible;
     top: 0;
     left: -100%;
-
     width: 270px;
     height: 100%;
-
     margin: 0;
     padding: 80px 0;
-
     list-style: none;
     text-align: left;
-
     background-color: #ECEFF1;
     box-shadow: 1px 0 6px rgba(0, 0, 0, .2);
 }
@@ -214,7 +235,7 @@ section {
     left: 0;
 }
 
-.menu__btn > span,
+.menFu__btn > span,
 .menu__btn > span::before,
 .menu__btn > span::after {
     transition-duration: .25s;
@@ -263,12 +284,12 @@ section {
     cursor: pointer;
     padding: 14px 16px;
     transition: 0.3s;
+    font-size: 25px;
 }
 
 /* Change background color of buttons on hover */
 .tab button:hover {
     background-color: #ddd;
-    font-size: 1pc;
 }
 
 /* Create an active/current tablink class */
@@ -314,6 +335,7 @@ section {
     right: 50px;
     opacity: 0;
     visibility: hidden;
+    margin-top: 6px;
 }
 
 .popup:target {
@@ -375,4 +397,12 @@ section {
 
 .popup__close:after {
     transform: rotate(-45deg);
+}
+
+.btn__login {
+    font-family: "Raleway", sans-serif;
+    font-size: 14pt;
+    font-weight: normal;
+    margin-right: -15px;
+    margin-top: 20px;
 }
